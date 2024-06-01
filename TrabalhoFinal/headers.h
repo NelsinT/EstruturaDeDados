@@ -9,7 +9,7 @@ typedef struct {
 
 typedef struct Pedido {
     int numero;
-    char mesa[50];
+    char mesa[50]; // Field to store mesa name
     struct Funcionario *funcionario;
     Produto produtos[50];
     int quantidade[50];
@@ -20,9 +20,11 @@ typedef struct Pedido {
 
 typedef struct {
     char nome[50];
+    int lugares;
+    char tipo[50];
+    char estado[20];
     Pedido *pedidos_abertos;
     Pedido *pedidos_fechados;
-    char estado[20];
 } Mesa;
 
 typedef struct {
@@ -49,5 +51,10 @@ void carregar_funcionarios(Funcionario *funcionarios, int *total_funcionarios, c
 void editar_funcionario(Funcionario *funcionarios, int total_funcionarios);
 void remover_funcionario(Funcionario *funcionarios, int *total_funcionarios);
 void tratar_pedidos(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios);
+void listar_mesas(Mesa *mesas, int total_mesas);
+void criar_mesas(Mesa mesas[], int *num_mesas, int lugares_por_mesa);
+void opcoes_mesas(Mesa mesas[], int total_mesas, int lugares_por_mesa);
+void verificar_estado_mesa(Mesa mesas[], int total_mesas);
+void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios);
 
 #endif

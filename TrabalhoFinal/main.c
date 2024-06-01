@@ -24,6 +24,8 @@ int main()
         fclose(file);
     }
 
+    int lugares_por_mesa; // Declara a variável lugares_por_mesa antes de usá-la
+
     int opcao;
     do
     {
@@ -33,7 +35,7 @@ int main()
         printf("\t3. Editar Funcionarios\n");
         printf("\t4. Remover Funcionarios\n");
         printf("\t5. Tratar Pedidos\n");
-        printf("\t6. Eliminar Pedido Aberto\n");
+        printf("\t6. Gerir Mesas\n");
         printf("\t7. Fechar o Dia\n");
         printf("\t8. Registrar Produto\n");
         printf("\t9. Listar Produtos\n");
@@ -61,12 +63,13 @@ int main()
         case 4:
             remover_funcionario(funcionarios, &total_funcionarios);
             break;
+
         case 5:
-            tratar_pedidos(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
+         tratar_pedidos(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
             break;
 
         case 6:
-            // Implementar eliminação de pedido aberto
+        opcoes_mesas(mesas, total_mesas, lugares_por_mesa);
             break;
 
         case 7:
