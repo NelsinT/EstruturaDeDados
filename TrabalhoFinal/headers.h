@@ -16,16 +16,17 @@ typedef struct Pedido {
     int total_produtos;
     float valor_a_pagar;
     struct Pedido *prox;
+    char estado[20];
 } Pedido;
 
 typedef struct {
     char nome[50];
-    int lugares;
-    char tipo[50];
-    char estado[20];
+    char estado[20]; // "disponivel" ou "ocupada"
+    int numero; // Número sequencial da mesa
     Pedido *pedidos_abertos;
     Pedido *pedidos_fechados;
 } Mesa;
+
 
 typedef struct {
     char nome[50];
@@ -53,8 +54,9 @@ void remover_funcionario(Funcionario *funcionarios, int *total_funcionarios);
 void tratar_pedidos(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios);
 void listar_mesas(Mesa *mesas, int total_mesas);
 void criar_mesas(Mesa mesas[], int *num_mesas, int lugares_por_mesa);
-void opcoes_mesas(Mesa mesas[], int total_mesas, int lugares_por_mesa);
+void opcoes_mesas(Mesa mesas[], int *total_mesas, int *lugares_por_mesa);
 void verificar_estado_mesa(Mesa mesas[], int total_mesas);
 void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios);
+void salvar_pedidos_csv(Mesa *mesas, int total_mesas, const char *filename);
 
 #endif

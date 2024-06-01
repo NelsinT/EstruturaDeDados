@@ -9,6 +9,7 @@ int main()
     Mesa mesas[50];
     Produto produtos[100];
     int total_funcionarios = 0, total_mesas = 0, total_produtos = 0;
+    int lugares_por_mesa = 0; // Inicializando a variável
 
     abrir_dia();
     carregar_funcionarios(funcionarios, &total_funcionarios, "funcionarios.bin");
@@ -23,8 +24,6 @@ int main()
         }
         fclose(file);
     }
-
-    int lugares_por_mesa; // Declara a variável lugares_por_mesa antes de usá-la
 
     int opcao;
     do
@@ -65,11 +64,11 @@ int main()
             break;
 
         case 5:
-         tratar_pedidos(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
+            tratar_pedidos(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
             break;
 
         case 6:
-        opcoes_mesas(mesas, total_mesas, lugares_por_mesa);
+            opcoes_mesas(mesas, &total_mesas, &lugares_por_mesa);
             break;
 
         case 7:
