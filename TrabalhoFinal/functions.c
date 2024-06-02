@@ -74,8 +74,10 @@ void adicionar_produto_pedido(Mesa *mesa, Produto *produtos, int total_produtos,
     printf("Produto adicionado ao pedido.\n");
 }
 
-void pagar_pedido(Mesa *mesa, int numero_pedido) {
-    if (mesa->pedidos_abertos == NULL) {
+void pagar_pedido(Mesa *mesa, int numero_pedido)
+{
+    if (mesa->pedidos_abertos == NULL)
+    {
         printf("Nao ha pedidos abertos para esta mesa.\n");
         return;
     }
@@ -84,19 +86,22 @@ void pagar_pedido(Mesa *mesa, int numero_pedido) {
     mesa->pedidos_abertos = NULL;
     strcpy(mesa->estado, "disponivel");
 
-    if (mesa->pedidos_fechados == NULL) {
+    if (mesa->pedidos_fechados == NULL)
+    {
         mesa->pedidos_fechados = pedido;
-    } else {
+    }
+    else
+    {
         Pedido *aux = mesa->pedidos_fechados;
-        while (aux->prox != NULL) {
+        while (aux->prox != NULL)
+        {
             aux = aux->prox;
         }
         aux->prox = pedido;
     }
     printf("Pedido pago e fechado.\n");
 
-    // Salvar os pedidos em CSV após o pagamento
-    salvar_pedidos_csv(mesa, 1, "pedidos.csv"); // Salvando apenas a mesa atual em CSV
+    salvar_pedidos_csv(mesa, 1, "pedidos.csv");
 }
 
 void eliminar_pedido_aberto(Mesa *mesa, int numero_pedido, Produto *produtos, int total_produtos)
@@ -215,30 +220,35 @@ void remover_produto(Produto *produtos, int *total_produtos, char *nome)
 
     printf("Produto removido com sucesso.\n");
 }
-void tratar_notas_encomenda(Produto *produtos, int total_produtos) {
+void tratar_notas_encomenda(Produto *produtos, int total_produtos)
+{
     FILE *file = fopen("notas_encomenda.txt", "a");
-    if (!file) {
+    if (!file)
+    {
         printf("Erro ao abrir o arquivo de notas de encomenda.\n");
         return;
     }
 
     int produtos_inseridos = 0;
 
-    // Iterar sobre os produtos
-    for (int i = 0; i < total_produtos; i++) {
-        if (produtos[i].quantidade < 5) {
-            // Escrever o produto no arquivo de notas de encomenda
+    for (int i = 0; i < total_produtos; i++)
+    {
+        if (produtos[i].quantidade < 5)
+        {
             fprintf(file, "Produto: %s, Quantidade: %d\n", produtos[i].nome, produtos[i].quantidade);
-            produtos[i].quantidade = 0; // Reinicializa a quantidade do produto para 0
+            produtos[i].quantidade = 0;
             produtos_inseridos++;
         }
     }
 
     fclose(file);
 
-    if (produtos_inseridos > 0) {
+    if (produtos_inseridos > 0)
+    {
         printf("%d produtos foram adicionados nas notas de encomenda.\n", produtos_inseridos);
-    } else {
+    }
+    else
+    {
         printf("Nenhum produto precisa ser adicionado nas notas de encomenda.\n");
     }
 }
@@ -323,7 +333,6 @@ void editar_funcionario(Funcionario *funcionarios, int total_funcionarios)
     printf("Funcionario editado com sucesso.\n");
 }
 
-
 void remover_funcionario(Funcionario *funcionarios, int *total_funcionarios)
 {
     char nome[50];
@@ -364,7 +373,7 @@ void tratar_pedidos(Mesa *mesas, int total_mesas, Produto *produtos, int total_p
     printf("1. Adicionar produto a um pedido\n");
     printf("2. Pagar pedido\n");
     printf("3. Eliminar pedido aberto\n");
-    printf("4. Criar novo pedido\n"); // Adicionando a opção para criar um novo pedido
+    printf("4. Criar novo pedido\n");
     scanf("%d", &opcao);
 
     switch (opcao)
@@ -414,7 +423,7 @@ void tratar_pedidos(Mesa *mesas, int total_mesas, Produto *produtos, int total_p
         }
         break;
     case 4:
-    criar_novo_pedido(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
+        criar_novo_pedido(mesas, total_mesas, produtos, total_produtos, funcionarios, total_funcionarios);
 
     default:
         printf("Opcao invalida.\n");
@@ -430,7 +439,8 @@ void listar_mesas(Mesa *mesas, int total_mesas)
     }
 }
 
-void criar_mesas(Mesa *mesas, int *num_mesas, int lugares_por_mesa) {
+void criar_mesas(Mesa *mesas, int *num_mesas, int lugares_por_mesa)
+{
     Mesa nova_mesa;
     nova_mesa.numero = *num_mesas + 1;
     printf("Nome da mesa: ");
@@ -510,10 +520,13 @@ void verificar_estado_mesa(Mesa mesas[], int total_mesas)
            mesa->nome, mesa->estado);
 }
 
-void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios) {
+void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int total_produtos, Funcionario *funcionarios, int total_funcionarios)
+{
     printf("Mesas disponiveis:\n");
-    for (int i = 0; i < total_mesas; i++) {
-        if (strcmp(mesas[i].estado, "disponivel") == 0) {
+    for (int i = 0; i < total_mesas; i++)
+    {
+        if (strcmp(mesas[i].estado, "disponivel") == 0)
+        {
             printf("Numero: %d, Nome: %s\n", mesas[i].numero, mesas[i].nome);
         }
     }
@@ -523,20 +536,24 @@ void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int tota
     scanf("%d", &numero_mesa);
 
     Mesa *mesa_selecionada = NULL;
-    for (int i = 0; i < total_mesas; i++) {
-        if (mesas[i].numero == numero_mesa) {
+    for (int i = 0; i < total_mesas; i++)
+    {
+        if (mesas[i].numero == numero_mesa)
+        {
             mesa_selecionada = &mesas[i];
             break;
         }
     }
 
-    if (mesa_selecionada == NULL || strcmp(mesa_selecionada->estado, "ocupada") == 0) {
+    if (mesa_selecionada == NULL || strcmp(mesa_selecionada->estado, "ocupada") == 0)
+    {
         printf("Mesa invalida ou ocupada.\n");
         return;
     }
 
     printf("Produtos disponiveis:\n");
-    for (int i = 0; i < total_produtos; i++) {
+    for (int i = 0; i < total_produtos; i++)
+    {
         printf("Nome: %s, Preco: %.2f, Quantidade: %d\n",
                produtos[i].nome, produtos[i].preco, produtos[i].quantidade);
     }
@@ -551,24 +568,25 @@ void criar_novo_pedido(Mesa *mesas, int total_mesas, Produto *produtos, int tota
     adicionar_produto_pedido(mesa_selecionada, produtos, total_produtos, nome_produto, quantidade);
 }
 
-
-
-void salvar_pedidos_csv(Mesa *mesas, int total_mesas, const char *filename) {
+void salvar_pedidos_csv(Mesa *mesas, int total_mesas, const char *filename)
+{
     FILE *file = fopen(filename, "w");
-    if (!file) {
+    if (!file)
+    {
         printf("Erro ao abrir o arquivo %s para escrita.\n", filename);
         return;
     }
 
-    // Escrever o cabeçalho do CSV
     fprintf(file, "Numero Pedido;Nome Mesa;Produto;Quantidade;Preco;Valor a Pagar\n");
 
-    // Iterar através das mesas e seus pedidos
-    for (int i = 0; i < total_mesas; i++) {
+    for (int i = 0; i < total_mesas; i++)
+    {
         Mesa *mesa = &mesas[i];
         Pedido *pedido = mesa->pedidos_fechados;
-        while (pedido != NULL) {
-            for (int j = 0; j < pedido->total_produtos; j++) {
+        while (pedido != NULL)
+        {
+            for (int j = 0; j < pedido->total_produtos; j++)
+            {
                 fprintf(file, "%d,%s,%s,%d,%.2f,%.2f\n",
                         pedido->numero,
                         mesa->nome,

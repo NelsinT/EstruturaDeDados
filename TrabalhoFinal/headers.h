@@ -9,7 +9,7 @@ typedef struct {
 
 typedef struct Pedido {
     int numero;
-    char mesa[50]; // Field to store mesa name
+    char mesa[50]; 
     struct Funcionario *funcionario;
     Produto produtos[50];
     int quantidade[50];
@@ -21,8 +21,8 @@ typedef struct Pedido {
 
 typedef struct {
     char nome[50];
-    char estado[20]; // "disponivel" ou "ocupada"
-    int numero; // Número sequencial da mesa
+    char estado[20]; 
+    int numero; 
     Pedido *pedidos_abertos;
     Pedido *pedidos_fechados;
 } Mesa;

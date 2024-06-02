@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 int main()
 {
     Funcionario funcionarios[100];
