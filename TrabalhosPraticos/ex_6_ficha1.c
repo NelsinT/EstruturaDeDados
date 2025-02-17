@@ -4,9 +4,9 @@
 void ler_matriz(int v[linhas][colunas])
 {
     for (int i = 0; i < linhas; i++)
-            for (int j = 0; j < colunas; j++)
-        {   
-            printf("Introduza o valor da linha %d e da coluna %d: \n",i,j);
+        for (int j = 0; j < colunas; j++)
+        {
+            printf("Introduza o valor da linha %d e da coluna %d: \n", i, j);
             scanf("%d", &v[i][j]);
         }
 }
@@ -23,22 +23,22 @@ void print_matriz(int m3[linhas][colunas])
         printf("\n");
     }
 }
-void calcular_media(int m3[linhas][colunas]){
+void calcular_media(int m3[linhas][colunas])
+{
     int soma = 0;
     float media;
     for (int i = 0; i < linhas; i++)
     {
-        for (int j = 0; j < colunas; j)
+        for (int j = 0; j < colunas; j++)
         {
             soma += m3[i][j];
         }
 
         media = soma / (linhas * colunas);
-        printf("%d",soma);
-        printf("%f",media);
     }
+    printf("a soma e  %d\n ", soma);
+    printf("A media e : %f", media);
 
-    
 }
 int main()
 {
@@ -46,5 +46,4 @@ int main()
     ler_matriz(mat1);
     print_matriz(mat1);
     calcular_media(mat1);
-    printf("teste");
 }
